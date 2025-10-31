@@ -1,19 +1,10 @@
 import os
+from tqdm import tqdm
 
-def find_file(filename, search_path="/Users/aryan"):
-    """
-    Searches for a file in the given directory (and all subdirectories).
-
-    Args:
-        filename (str): The name of the file to search for.
-        search_path (str): The root directory to start searching from. Default is root (/).
-
-    Returns:
-        list: A list of full file paths matching the filename.
-    """
+def find_file(filename, search_path="/"):
     result_paths = []
 
-    for root, dirs, files in os.walk(search_path):
+    for root, dirs, files in tqdm(os.walk(search_path), desc="Searching...", unit="dir"):
         if filename in files:
             full_path = os.path.join(root, filename)
             result_paths.append(full_path)
